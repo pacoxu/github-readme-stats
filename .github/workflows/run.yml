@@ -19,3 +19,9 @@ jobs:
         with:
           WITH_STARED: true
           GH_USERNAME: pacoxu
+      - name: Push README
+        run: |
+          git config --local user.email "${{ env.GITHUB_EMAIL }}"
+          git config --local user.name "${{ env.GITHUB_NAME }}"
+          git commit -a -m 'docs: update readme.md'
+          git push
