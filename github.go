@@ -167,7 +167,7 @@ func fetchAllPrIssues(username string, client *github.Client) []*github.Issue {
 	return allIssues
 }
 
-func makePrRepos(issues []*github.Issue) ([]myPrInfo, int) {
+func makePrRepos(issues []*github.Issue, limit int) ([]myPrInfo, int) {
 	prMap := make(map[string]map[string]interface{})
 	totalCount := 0
 	for _, issue := range issues {
@@ -283,13 +283,17 @@ func send2Telegram(tgToken string, roomID int64, message string) bool {
 	return true
 }
 
-func makeMdTable(data [][]string, header []string) string {
+func makeMdTable(data [][]string, header []string, limit int) string {
 	tableString := &strings.Builder{}
 	table := tablewriter.NewWriter(tableString)
 	table.SetHeader(header)
 	table.SetBorders(tablewriter.Border{Left: true, Top: false, Right: true, Bottom: false})
 	table.SetCenterSeparator("|")
-	table.AppendBulk(data)
+	if limit != 0 {
+		table.AppendBulk(data[:limit])
+	} else {
+		table.AppendBulk(data)
+	}
 	table.Render()
 	return tableString.String()
 }
@@ -303,17 +307,17 @@ func makeCreatedString(repos []myRepoInfo, total int, reposNumber int) string {
 		starsData = append(starsData, []string{strconv.Itoa(i + 1), repo.mdName(), repo.create, repo.update, repo.lauguage, strconv.Itoa(repo.star)})
 	}
 	starsData = append(starsData, []string{"sum", "", "", "", "", strconv.Itoa(total)})
-	myStarsString := makeMdTable(starsData, []string{"ID", "Repo", "Start", "Update", "Lauguage", "Stars"})
+	myStarsString := makeMdTable(starsData, []string{"ID", "Repo", "Start", "Update", "Lauguage", "Stars"}, reposNumber+1)
 	return myCreatedTitle + myStarsString + "\n"
 }
 
-func makeContributedString(myPRs []myPrInfo, total int) string {
+func makeContributedString(myPRs []myPrInfo, total int, reposNumber int) string {
 	prsData := [][]string{}
 	for i, pr := range myPRs {
 		prsData = append(prsData, []string{strconv.Itoa(i + 1), pr.mdName(), pr.firstDate, pr.lasteDate, fmt.Sprintf("[%d](%s)", pr.prCount, getAllPrLinks(pr))})
 	}
 	prsData = append(prsData, []string{"sum", "", "", "", strconv.Itoa(total)})
-	myPrString := makeMdTable(prsData, []string{"ID", "Repo", "firstDate", "lasteDate", "prCount"})
+	myPrString := makeMdTable(prsData, []string{"ID", "Repo", "firstDate", "lasteDate", "prCount"}, reposNumber+1)
 	return myContributedTitle + myPrString + "\n"
 }
 
@@ -328,7 +332,7 @@ func makeStaredString(myStars []myStaredInfo, starNumber int) string {
 		repo := star.myRepoInfo
 		starsData = append(starsData, []string{strconv.Itoa(i + 1), repo.mdName(), star.staredDate, repo.lauguage, repo.update})
 	}
-	myStaredString := makeMdTable(starsData, []string{"ID", "Repo", "staredDate", "Lauguage", "LatestUpdate"})
+	myStaredString := makeMdTable(starsData, []string{"ID", "Repo", "staredDate", "Lauguage", "LatestUpdate"}, starNumber+1)
 	return myStaredTitle + myStaredString + "\n"
 }
 
