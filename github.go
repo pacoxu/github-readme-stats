@@ -365,7 +365,7 @@ func main() {
 	}
 
 	myCreatedString := makeCreatedString(myRepos, totalStarsCount, reposNumber)
-	myPrString := makeContributedString(myPRs, totalPrCount)
+	myPrString := makeContributedString(myPRs, totalPrCount, reposNumber)
 
 	readMeFile := path.Join(os.Getenv("GITHUB_WORKSPACE"), "README.md")
 	readMeContent, err := ioutil.ReadFile(readMeFile)
