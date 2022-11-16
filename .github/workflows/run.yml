@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
 env:
-  GITHUB_NAME: yihong0618
-  GITHUB_EMAIL: zouzou0208@gmail.com
-  STARED_NUMBER: 10
+  GITHUB_NAME: pacoxu-bot
+  GITHUB_EMAIL: paco2023@163.com
+  STARED_NUMBER: 20
 
 jobs:
   build:
