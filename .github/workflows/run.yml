@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: My GitHub Status
-        uses: ./
+        uses: pacoxu/github-readme-stats@main
         with:
           WITH_STARED: true
           GH_USERNAME: pacoxu
