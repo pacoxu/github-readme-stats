@@ -167,7 +167,7 @@ func fetchAllPrIssues(username string, client *github.Client) []*github.Issue {
 	return allIssues
 }
 
-func makePrRepos(issues []*github.Issue, limit int) ([]myPrInfo, int) {
+func makePrRepos(issues []*github.Issue) ([]myPrInfo, int) {
 	prMap := make(map[string]map[string]interface{})
 	totalCount := 0
 	for _, issue := range issues {
