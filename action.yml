@@ -26,7 +26,10 @@ inputs:
     description: "If with stared repos"
     default: true
     required: false
-
+  YEARS:
+    description: "only years"
+    default: 2022
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -43,7 +46,8 @@ runs:
     - ${{ inputs.TELEGRAM_TOKEN }}
     - "-withstared"
     - ${{ inputs.WITH_STARED }}
-
+    - "-years"
+    - ${{ inputs.YEARS }}
 branding:
   icon: github
   color: gray-dark

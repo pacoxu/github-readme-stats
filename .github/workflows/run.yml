@@ -14,11 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: My GitHub Status
-        uses: pacoxu/github-readme-stats@main
+      - name: My GitHub Yealy Status
+        uses: pacoxu/github-readme-stats@yearly-readme
         with:
           WITH_STARED: true
           GH_USERNAME: pacoxu
+          YEARS: 2022
       - name: Push README
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
