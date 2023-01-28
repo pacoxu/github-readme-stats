@@ -18,7 +18,7 @@ jobs:
         uses: pacoxu/github-readme-stats@yearly-readme
         with:
           WITH_STARED: true
-          GH_USERNAME: iceber
+          GH_USERNAME: pacoxu
           YEARS: 2022
       - name: Push README
         run: |
