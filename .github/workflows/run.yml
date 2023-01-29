@@ -19,7 +19,7 @@ jobs:
         with:
           WITH_STARED: true
           GH_USERNAME: carlory
-          YEARS: 2022
+          YEARS: 2019-2022
       - name: Push README
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
