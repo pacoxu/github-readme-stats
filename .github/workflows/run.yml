@@ -18,7 +18,7 @@ jobs:
         uses: pacoxu/github-readme-stats@yearly-readme
         with:
           WITH_STARED: true
-          GH_USERNAME: wzshiming
+          GH_USERNAME: carlory
           YEARS: 2022
       - name: Push README
         run: |
