@@ -27,7 +27,7 @@ var (
 	reposNumber    int
 	withStared     bool
 	showAllPR      bool
-	createdYears   string
+	created        string
 )
 
 var baseURL = "https://github.com/"
@@ -44,7 +44,7 @@ func init() {
 	flag.BoolVar(&withStared, "withstared", true, "if with stared repos")
 	flag.BoolVar(&showAllPR, "showallpr", true, "if you want to show all prs included closed")
 	// you can set it with a special day or month or duration like `2022-01..2022-02-21`(maybe a bug, not a feature ^v^)
-	flag.StringVar(&createdYears, "years", "2022", "years to show according to created date, for instance 2022 or 2021-2023")
+	flag.StringVar(&created, "created", "2023", "created to show according to created date, for instance 2022 or 2021-2023")
 }
 
 type myRepoInfo struct {
@@ -78,7 +78,7 @@ func (p *myPrInfo) repoLink() string {
 }
 
 func getAllPrLinks(p myPrInfo) string {
-	url := fmt.Sprintf("%s/pulls?q=created:%s+is:pr+author:%s", p.repoLink(), createdYears, githubUserName)
+	url := fmt.Sprintf("%s/pulls?q=created:%s+is:pr+author:%s", p.repoLink(), created, githubUserName)
 	return "https://" + strings.ReplaceAll(strings.Split(url, "https://")[1], ":", "%3A")
 }
 
@@ -146,9 +146,9 @@ func fetchAllPrIssues(username string, client *github.Client) []*github.Issue {
 	nowPage := 100
 	opt := &github.SearchOptions{ListOptions: github.ListOptions{Page: 1, PerPage: 100}}
 	var allIssues []*github.Issue
-	filterContext := fmt.Sprintf("is:pr author:%s is:closed is:merged created:%s", username, createdYears)
+	filterContext := fmt.Sprintf("is:pr author:%s is:closed is:merged created:%s", username, created)
 	if showAllPR {
-		filterContext = fmt.Sprintf("is:pr author:%s created:%s", username, createdYears)
+		filterContext = fmt.Sprintf("is:pr author:%s created:%s", username, created)
 	}
 	for {
 		result, _, err := client.Search.Issues(context.Background(), filterContext, opt)

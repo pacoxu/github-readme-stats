@@ -26,9 +26,9 @@ inputs:
     description: "If with stared repos"
     default: true
     required: false
-  YEARS:
-    description: "only years"
-    default: 2022
+  CREATED:
+    description: "created date range, it can be a day `2022-03-04`, a year, `2023` or a date range `2022..2023-03-03`"
+    default: 2023
     required: false
 runs:
   using: "docker"
@@ -46,8 +46,8 @@ runs:
     - ${{ inputs.TELEGRAM_TOKEN }}
     - "-withstared"
     - ${{ inputs.WITH_STARED }}
-    - "-years"
-    - ${{ inputs.YEARS }}
+    - "-created"
+    - ${{ inputs.CREATED }}
 branding:
   icon: github
   color: gray-dark
