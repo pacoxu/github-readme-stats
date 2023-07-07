@@ -44,7 +44,7 @@ func init() {
 	flag.BoolVar(&withStared, "withstared", true, "if with stared repos")
 	flag.BoolVar(&showAllPR, "showallpr", true, "if you want to show all prs included closed")
 	// you can set it with a special day or month or duration like `2022-01..2022-02-21`(maybe a bug, not a feature ^v^)
-	flag.StringVar(&created, "created", "2023", "created to show according to created date, for instance 2022 or 2021-2023")
+	flag.StringVar(&created, "created", "2022-07-01..2023-07-01", "created to show according to created date, for instance 2022 or 2021-2023")
 }
 
 type myRepoInfo struct {
