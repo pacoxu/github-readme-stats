@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: My GitHub Yealy Status
-        uses: pacoxu/github-readme-stats@yearly-readme
+        uses: pacoxu/github-readme-stats@wilsonwu
         with:
           WITH_STARED: true
           GH_USERNAME: wilsonwu
