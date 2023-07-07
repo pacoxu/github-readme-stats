@@ -28,7 +28,7 @@ inputs:
     required: false
   CREATED:
     description: "created date range, it can be a day `2022-03-04`, a year, `2023` or a date range `2022..2023-03-03`"
-    default: 2023
+    default: "2022-07-01..2023-07-01"
     required: false
 runs:
   using: "docker"
